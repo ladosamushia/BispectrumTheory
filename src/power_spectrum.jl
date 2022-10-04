@@ -19,4 +19,7 @@ using Interpolations
 """
 
 function init_linear_pk(filename)
-    kPk = readdlm(filename, comment="#")
+    kPk = readdlm(filename, comments=true)
+    linPk = interpolate((kPk[:,1],), kPk[:,2], Gridded(Linear()))
+    return linPk
+end

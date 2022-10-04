@@ -1,6 +1,7 @@
 # This file contains linear power spectrum computed from CAMB using default
 # values. Columns are: wavenumber (in Mpc/h) and power spectrum (h^3/Mpc^3)
-
+# I added 0, 0 by hand
+    0.00000        0.00000
     0.10000E-03    0.56947E+03
     0.10202E-03    0.58051E+03
     0.10408E-03    0.59175E+03
