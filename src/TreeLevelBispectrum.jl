@@ -3,6 +3,8 @@
     model.
 """
 
+using Interpolations
+
 """
     tree_level_bk(μ1, ϕ, k1, k2, k3, b1, b2, f)
 
@@ -25,11 +27,11 @@ function tree_level_bk(μ1, ϕ, k1, k2, k3, b1, b2, f, pk)
     pk2 = pk(k2)
     pk3 = pk(k3)
 
-    μ12 = (k3^2 - k1^2 - k2^2)/(2*k1*k2)
+    μ12 = -(k3^2 - k1^2 - k2^2)/(2*k1*k2)
     μ2 = μ1*μ12 - sqrt(1 - μ1^2)*sqrt(1 - μ12^2)*cos(ϕ)
     μ3 = -(μ1*k1 + μ2*k2)/k3
-    μ31 = -(k1 + k2*μ12)/k3
-    μ23 = -(k1*μ12 + k2)/k3
+    μ31 = -(k2^2 - k1^2 - k3^2)/(2*k1*k3)
+    μ23 = -(k1^2 - k3^2 - k2^2)/(2*k3*k2)
  
     Z1k1 = b1 + f*μ1^2
     Z1k2 = b1 + f*μ2^2
@@ -54,5 +56,5 @@ function tree_level_bk(μ1, ϕ, k1, k2, k3, b1, b2, f, pk)
     Bi += Z2k23*Z1k2*Z1k3*pk2*pk3
     Bi += Z2k31*Z1k3*Z1k1*pk3*pk1
  
-    return Bisp 
+    return 2*Bi 
 end
