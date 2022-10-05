@@ -15,7 +15,8 @@ using Interpolations
     - filename::String - name of the file with the linear power spectrum
     
     Output:
-    - linPK:: - interpolation object for the linear power spectrum
+    - linPK::Interpolations.GriddedInterpolation: - interpolation object for 
+    the linear power spectrum
 """
 
 function init_linear_pk(filename)
