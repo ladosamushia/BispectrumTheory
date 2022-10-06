@@ -34,13 +34,17 @@ end
 
     μ1 = 0; ϕ = 0; k1 = 1.0; k2 = 1.0; k3 = 1.0; b1 = 1; b2 = 1; f = 0
     bk = tree_level_bk(μ1, ϕ, k1, k2, k3, b1, b2, f, pk)
-    #@test isapprox(bk, 3*2*25/14)
+    @test isapprox(bk, 3*2*25/14)
+
+    μ1 = 0; ϕ = 0; k1 = 1.0; k2 = 1.0; k3 = 1.0; b1 = 1; b2 = 0; f = 1
+    bk = tree_level_bk(μ1, ϕ, k1, k2, k3, b1, b2, f, pk)
+    @test isapprox(bk, 201/8)
 
     μ1 = 1/2; ϕ = 0; k1 = 1.0; k2 = 1.0; k3 = 1.0; b1 = 1; b2 = 0; f = 1
     bk = tree_level_bk(μ1, ϕ, k1, k2, k3, b1, b2, f, pk)
-    #@test isapprox(bk, 2*63/16)
+    @test isapprox(bk, 11415/448)
 
     μ1 = 1; ϕ = pi/2; k1 = 1.0; k2 = 1.0; k3 = 1.0; b1 = 1; b2 = 0; f = 1
     bk = tree_level_bk(μ1, ϕ, k1, k2, k3, b1, b2, f, pk)
-    #@test isapprox(bk, 2*201/16)
+    @test isapprox(bk, 11415/448)
 end;
