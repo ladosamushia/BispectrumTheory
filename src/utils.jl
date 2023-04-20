@@ -18,7 +18,7 @@ function solve_triangular_geometry(μ1, ϕ, k1, k2, k3)
     μ12 = (k1^2 + k2^2 - k3^2)/(2*k1*k2)
     μ31 = (k3^2 + k1^2 - k2^2)/(2*k3*k1)
     μ23 = (k2^2 + k3^2 - k1^2)/(2*k2*k3)
-    μ3 = - μ1*μ12 - sqrt(1 - μ1^2)*sqrt(1 - μ12^2)*cos(ϕ)
+    μ3 = - μ1*μ31 - sqrt(1 - μ1^2)*sqrt(1 - μ31^2)*cos(ϕ)
     μ2 = -(μ1*k1 + μ3*k3)/k2
     return μ2, μ3, μ12, μ23, μ31
 end
@@ -43,14 +43,14 @@ function kkk_grid(kmin, kstep, Nk)
     kgrid = collect(range(kmin, step=kstep, length=Nk))
     Ntri = 0
     for k1 in kgrid, k2 in kgrid, k3 in kgrid
-        if k1 >= k2 >= k3 && k2 + k3 >= k1
+        if k1 <= k2 <= k3 && k1 + k2 >= k3
             Ntri += 1
         end
     end
     kkk = zeros(3, Ntri)
     counter = 1
     for k1 in kgrid, k2 in kgrid, k3 in kgrid
-        if k1 >= k2 >= k3 && k2 + k3 >= k1
+        if k1 <= k2 <= k3 && k1 + k2 >= k3
             kkk[:,counter] = [k1; k2; k3]
             counter += 1
         end
