@@ -21,4 +21,20 @@ function B00(k1, k2, k3, b1, b2, f, pk, bk)
     return hcubature(B5D, [0, 0], [1, 2*pi])[1]
 end
 
-function B00_itp(k1, k2, k3, B00_grid)
+
+function B00_itp(k, b1, b2, f, pk, bk)
+    N = length(k)
+    B00_grid = zeros(N, N, N)
+    for i1 in 1:N, i2 in i1:N, i3 in i2:N
+        Bth = B00(k[i1], k[i2], k[i3], b1, b2, f, pk, bk)
+        B00_grid[i1,i2,i3] = Bth
+        B00_grid[i1,i3,i2] = Bth
+        B00_grid[i2,i1,i3] = Bth
+        B00_grid[i2,i3,i1] = Bth
+        B00_grid[i3,i1,i2] = Bth
+        B00_grid[i3,i2,i1] = Bth
+    end
+    print(B00_grid)
+    itp = interpolate((k1, k2, k3), B00_grid, BSpline(Linear()))
+    return itp
+end
