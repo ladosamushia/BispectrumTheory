@@ -7,6 +7,27 @@ using Test
 
 include("../src/TreeLevelBispectrum.jl")
 
+@testset "solve_triangular_geometry" begin
+    computation = solve_triangular_geometry(0,0,1,1,1)
+    expectation = [sqrt(3)/2, -sqrt(3)/2, 1/2, 1/2, 1/2]
+    @test all(abs.(computation .- expectation) .< 1e-6)
+    computation = solve_triangular_geometry(1,0,1,1,1)
+    expectation = [-1/2, -1/2, 1/2, 1/2, 1/2]
+    @test all(abs.(computation .- expectation) .< 1e-6)
+    computation = solve_triangular_geometry(sqrt(3)/2,0,1,1,1) 
+    expectation = [0, -sqrt(3)/2, 1/2, 1/2, 1/2]
+    @test all(abs.(computation .- expectation) .< 1e-6)
+    computation = solve_triangular_geometry(1/2,0,1,1,1)
+    expectation = [1/2, -1, 1/2, 1/2, 1/2]
+    @test all(abs.(computation .- expectation) .< 1e-6)
+    computation = solve_triangular_geometry(1,pi/3,1,1,1)
+    expectation = [-1/2, -1/2, 1/2, 1/2, 1/2]
+    @test all(abs.(computation .- expectation) .< 1e-6)
+    computation = solve_triangular_geometry(0,pi/2,1,1,1)
+    expectation = [0, 0, 1/2, 1/2, 1/2]
+    @test all(abs.(computation .- expectation) .< 1e-6)
+end
+
 # Do some limiting values that are easy to compute by hand
 @testset "TreeLevelBispectrum" begin
     pk = interpolate(([0, 1, 2, 3],), [1, 1, 1, 1], Gridded(Linear()))
