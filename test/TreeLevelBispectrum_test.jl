@@ -48,3 +48,10 @@ end
     bk = tree_level_bk(μ1, ϕ, k1, k2, k3, b1, b2, f, pk)
     @test isapprox(bk, 11415/448)
 end;
+
+@testset "tree_level_b00" begin
+    pk = interpolate(([0, 1, 2, 3],), [1, 1, 1, 1], Gridded(Linear()))
+
+    b00 = tree_level_b00(1, 1, 1, 1, 0, 0, pk)
+    @test isapprox(b00, 27/7)
+end

@@ -18,9 +18,8 @@ include("./TreeLevelBispectrum.jl")
 """
 function B00(k1, k2, k3, b1, b2, f, pk, bk)
     B5D = x -> bk(x[1], x[2], k1, k2, k3, b1, b2, f, pk)
-    return hcubature(B5D, [0, 0], [1, 2*pi])[1]/2/π
+    return hcubature(B5D, [-1, 0], [1, 2*pi], reltol=1e-8)[1]/8/π
 end
-
 
 function B00_itp(k, b1, b2, f, pk, bk)
     N = length(k)
