@@ -26,6 +26,9 @@ include("../src/TreeLevelBispectrum.jl")
     computation = solve_triangular_geometry(0,pi/2,1,1,1)
     expectation = [0, 0, 1/2, 1/2, 1/2]
     @test all(abs.(computation .- expectation) .< 1e-6)
+    computation = solve_triangular_geometry(0,0,5,4,3)
+    expectation = [3/5, -4/5, 4/5, 0, 3/5]
+    @test all(abs.(computation .- expectation) .< 1e-6)
 end
 
 # Do some limiting values that are easy to compute by hand
@@ -54,4 +57,7 @@ end;
 
     b00 = tree_level_b00(1, 1, 1, 1, 0, 0, pk)
     @test isapprox(b00, 27/7)
+
+    b00 = tree_level_b00(1, 1, 1, 1, 1, 0, pk)
+    @test isapprox(b00, 75/14)
 end
